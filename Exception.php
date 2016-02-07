@@ -68,12 +68,16 @@ class Exception extends \Exception {
 	public function get_string_from_code($code) {
 		$errors = [
 			self::ERR_GENERAL => 'General Error',
-			self::ERR_UNAUTHORIZED => 'Unauthorized',
 			self::ERR_BAD_REQUEST => 'Bad Request',
+			self::ERR_UNAUTHORIZED => 'Unauthorized',
+			self::ERR_FORBIDDEN => 'Forbidden',
 			self::ERR_INTERNAL_ERROR => 'Internal Error',
-			self::ERR_RESOURCE_NOT_FOUND => 'Resource Not Found',
 			self::ERR_PRECONDITION_FAILED => 'Precondition Failed',
-			self::ERR_NETWORKING_DISABLED => 'Networking is Disabled'
+			self::ERR_RESOURCE_NOT_FOUND => 'Resource Not Found',
+			self::ERR_INVALID_RESOURCE => 'Invalid Resource',
+			self::ERR_NOT_IMPLEMENTED => 'Feature not implemented',
+			self::ERR_DISABLED => 'Feature Disabled',
+			self::ERR_NETWORKING_DISABLED => 'Networking is Disabled',
 		];
 
 		return (isset($errors[$code])) ? $errors[$code] : '';
