@@ -6,6 +6,7 @@ namespace pdyn\base\tests;
  *
  * @group pdyn
  * @group pdyn_base
+ * @codeCoverageIgnore
  */
 class UtilsTest extends \PHPUnit_Framework_TestCase {
 
