@@ -44,9 +44,9 @@ class ErrorHandler {
 		} else {
 			// Atlas exceptions' error codes are HTTP status codes, so send one.
 			if (($exception instanceof \pdyn\base\Exception) && !empty($errcode) && !headers_sent()) {
-				\atlas\http\HttpUtilities::send_status_code($errcode, '', false);
+				\pdyn\httputils\Utils::send_status_code($errcode, '', false);
 			} else {
-				\atlas\http\HttpUtilities::send_status_code(500, '', false);
+				\pdyn\httputils\Utils::send_status_code(500, '', false);
 			}
 			$LOG = new \pdyn\log\Logger($CFG->log_general);
 			$LOG->error($errcodelabel.': '.$exception);
