@@ -49,4 +49,45 @@ class UtilsTest extends \PHPUnit_Framework_TestCase {
 	public function test_isclienv() {
 		$this->assertTrue(\pdyn\base\Utils::is_cli_env());
 	}
+
+	/**
+	 * Test uniqid function.
+	 */
+	public function test_uniqid() {
+		//test no parameters
+		$one = \pdyn\base\Utils::uniqid();
+		$two = \pdyn\base\Utils::uniqid();
+		$this->assertInternalType('string', $one);
+		$this->assertInternalType('string', $two);
+		$this->assertNotEquals($one, $two);
+
+		$prefixes = ['', ''];
+		$min = 13;
+		foreach ($prefixes as $i => $prefix) {
+			$lengths = [2, 3, 4, 6, 10, 12, 13, 14, 16, 32, 64, 128];
+			foreach ($lengths as $j => $len) {
+
+				if (!empty($prefix)) {
+					$one = \pdyn\base\Utils::uniqid($len, $prefix);
+					$two = \pdyn\base\Utils::uniqid($len, $prefix);
+				} else {
+					$one = \pdyn\base\Utils::uniqid($len);
+					$two = \pdyn\base\Utils::uniqid($len);
+				}
+
+				$this->assertInternalType('string', $one, 'Failed with '.$prefix.'/'.$len);
+				$this->assertInternalType('string', $two, 'Failed with '.$prefix.'/'.$len);
+
+				// Encountered false failures when using $this->assertNotEquals
+				$this->assertTrue(($one !== $two), 'Failed with '.$prefix.'/'.$len);
+
+				if ($len < $min) {
+					$len = $min;
+				}
+
+				$this->assertEquals($len, mb_strlen($one), 'Failed with '.$prefix.'/'.$len);
+				$this->assertEquals($len, mb_strlen($two), 'Failed with '.$prefix.'/'.$len);
+			}
+		}
+	}
 }

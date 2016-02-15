@@ -46,4 +46,24 @@ class Utils {
 		}
 		return $s;
 	}
+
+	/**
+	 * Generate a guaranteed unique value of a specified length.
+	 * @param int|bool $length A desired length, or false to use uniqid length.
+	 * @return string The unique string.
+	 */
+	public static function uniqid($length = false) {
+		if ($length <= 13) {
+			return uniqid();
+		}
+		$uniq = strrev(str_replace('.', '', uniqid('', true)));
+		$uniqlen = mb_strlen($uniq);
+		if ($length === false || $length === $uniqlen) {
+			return $uniq;
+		} elseif ($length < $uniqlen) {
+			return mb_substr($uniq, 0, $length);
+		} else {
+			return \pdyn\base\Utils::genRandomStr(($length - mb_strlen($uniq))).$uniq;
+		}
+	}
 }
