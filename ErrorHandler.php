@@ -99,7 +99,7 @@ class ErrorHandler {
 			$line = 'Line: '. ((isset($trace['line'])) ? $trace['line'] : '-');
 			$func = ((isset($trace['function'])) ? $trace['function'] : '');
 			ini_set('html_errors', 0);
-			$argstr = array();
+			$argstr = [];
 			if (!empty($trace['args']) && is_array($trace['args'])) {
 				foreach ($trace['args'] as $arg) {
 					ob_start();
